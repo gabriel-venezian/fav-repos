@@ -15,6 +15,7 @@ export const Container = styled.main`
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #0D2636;
   }
 `;
 
@@ -24,7 +25,7 @@ export const Form = styled.form`
 
   input {
     flex: 1;
-    border: 1px solid #ddd;
+    border: 1px solid #DDD;
     padding-block: 10px;
     padding-inline: 15px;
     border-radius: 4px;
@@ -51,8 +52,8 @@ export const SubmitButton = styled.button.attrs(props => ({
   padding-block: 0;
   padding-inline: 15px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   &[disabled]{
     cursor: not-allowed;
@@ -64,4 +65,42 @@ export const SubmitButton = styled.button.attrs(props => ({
       animation: ${spinnerAnimation} 2s linear infinite;
     }
   `}
+`;
+
+export const RepositoriesUnorderedList = styled.ul`
+  list-style: none;
+  margin-block-start: 20px;
+
+  li {
+    padding-block: 15px;
+    padding-inline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    & + li {
+      border-block-start: 1px solid #EEE;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a {
+      color: #0D2636;
+      text-decoration: none;
+      display: flex;
+    }
+  }
+`;
+
+export const DeleteButton = styled.button.attrs({
+  type: 'button'
+})`
+  background: transparent;
+  color: #0D2636;
+  border: 0;
+  display: flex;
 `;

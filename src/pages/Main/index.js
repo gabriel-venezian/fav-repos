@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
-import { FaGithub, FaPlus, FaSpinner } from 'react-icons/fa';
-import { Container, Form, SubmitButton } from './styles';
+import { FaGithub, FaPlus, FaSpinner, FaChevronDown, FaTrash } from 'react-icons/fa';
+import { Container, Form, SubmitButton, RepositoriesUnorderedList, DeleteButton } from './styles';
 import api from '../../services/api';
 
 export default function Main() {
@@ -36,10 +36,15 @@ export default function Main() {
     setNewRepo(e.target.value);
   }
 
+  const handleDelete = useCallback((repositoryName) => {
+    const find = repositories.filter(r => r.name !== repositoryName)
+    setRepositories(find);
+  }, [repositories]);
+
   return (
     <Container>
       <h1>
-        <FaGithub size={25} />
+        <FaGithub size={25} color='#0D2636' />
         My Favorite Repositories
       </h1>
 
@@ -58,6 +63,22 @@ export default function Main() {
           }
         </SubmitButton>
       </Form>
+
+      <RepositoriesUnorderedList>
+        {repositories.map(repo => (
+          <li key={repo.name}>
+            <p>
+              <a href="">
+                <FaChevronDown size={12} />
+              </a>
+              {repo.name}
+            </p>
+            <DeleteButton onClick={() => handleDelete(repo.name)}>
+              <FaTrash size={14} />
+            </DeleteButton>
+          </li>
+        ))}
+      </RepositoriesUnorderedList>
     </Container>
   )
 }
