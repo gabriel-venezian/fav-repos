@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FaGithub, FaPlus, FaSpinner, FaInfoCircle, FaTrash } from 'react-icons/fa';
-import { Container, Form, SubmitButton, RepositoriesUnorderedList, DeleteButton } from './styles';
+import { Container, Section, Form, SubmitButton, RepositoriesUnorderedList, DeleteButton } from './styles';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
@@ -41,7 +41,7 @@ export default function Main() {
         const repoAlreadyExists = repositories.find(repo => repo.name === newRepo);
 
         if (repoAlreadyExists) {
-          throw new Error('The specified repository already exists.')
+          throw new Error('The specified repository already exists.');
         }
 
         setRepositories([...repositories, data]);
@@ -69,42 +69,50 @@ export default function Main() {
 
   return (
     <Container>
-      <h1>
-        <FaGithub size={25} color='#0D2636' />
-        My Favorite Repositories
-      </h1>
+      <Section>
+        <h1>
+          <FaGithub size={25} color='#0D2636' />
+          My Favorite Repositories
+        </h1>
 
-      <Form onSubmit={handleSubmit} error={alert}>
-        <input type="text" placeholder="Add Repositories"
-          value={newRepo}
-          onChange={handleInputChange}
-        />
-        <SubmitButton loading={loading ? 1 : 0}>
-          {
-            loading ? (
-              <FaSpinner color="#FFF" size={14} />
-            ) : (
-              <FaPlus color="#FFF" size={14} />
-            )
-          }
-        </SubmitButton>
-      </Form>
+        <Form onSubmit={handleSubmit} error={alert}>
+          <input type="text" placeholder="Add Repositories"
+            value={newRepo}
+            onChange={handleInputChange}
+          />
+          <SubmitButton loading={loading ? 1 : 0}>
+            {
+              loading ? (
+                <FaSpinner color="#FFF" size={14} />
+              ) : (
+                <FaPlus color="#FFF" size={14} />
+              )
+            }
+          </SubmitButton>
+        </Form>
 
-      <RepositoriesUnorderedList>
-        {repositories.map(repo => (
-          <li key={repo.name}>
-            <p>
-              <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
-                <FaInfoCircle size={14} />
-              </Link>
-              {repo.name}
-            </p>
-            <DeleteButton onClick={() => handleDelete(repo.name)}>
-              <FaTrash size={14} />
-            </DeleteButton>
-          </li>
-        ))}
-      </RepositoriesUnorderedList>
+        <RepositoriesUnorderedList>
+          {repositories.map(repo => (
+            <li key={repo.name}>
+              <p>
+                <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
+                  <FaInfoCircle
+                    size={14}
+                    color="#0D2636"
+                  />
+                </Link>
+                {repo.name}
+              </p>
+              <DeleteButton onClick={() => handleDelete(repo.name)}>
+                <FaTrash
+                  size={14}
+                  color="#0D2636"
+                />
+              </DeleteButton>
+            </li>
+          ))}
+        </RepositoriesUnorderedList>
+      </Section>
     </Container>
   )
 }

@@ -2,6 +2,11 @@ import styled, { keyframes, css } from 'styled-components';
 
 export const Container = styled.main`
   max-inline-size: 700px;
+  margin-inline: auto;
+  padding-inline: 20px;
+`;
+
+export const Section = styled.section`
   background-color: #FFF;
   border-radius: 4px;
   padding-inline: 30px;
@@ -16,6 +21,11 @@ export const Container = styled.main`
     align-items: center;
     gap: 10px;
     color: #0D2636;
+    justify-content: center;
+  }
+
+  p {
+    color: #383838;
   }
 `;
 
